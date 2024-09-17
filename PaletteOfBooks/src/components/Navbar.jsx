@@ -6,8 +6,8 @@ export function Navbar(){
     <div className={styles.nav}>
       <nav>
         <button>Add a new book</button>
-        <input type="text" />
-        <FcList />
+        <input type="text"/>
+        <FcList size={48}/>
         <button>CSV</button>
         <button>JSON</button>
       </nav>
