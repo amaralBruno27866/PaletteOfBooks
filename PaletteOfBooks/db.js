@@ -4,9 +4,9 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const { Client } = pkg;
+const { Pool } = pkg;
 
-const client = new Client({
+const pool = new Pool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   port: process.env.DB_PORT,
@@ -17,20 +17,14 @@ const client = new Client({
   }
 });
 
-client.connect((err) => {
+// Check the database connection
+pool.connect((err, client, release) => {
   if (err) {
-    console.error('Error connecting to database:', err);
+    console.error('Error connecting to the database:', err.stack);
   } else {
-    console.log('Connected to database');
-
-    // Query the inventory.book table to retrieve data
-    client.query('SELECT * FROM inventory.book', (err, res) => {
-      if (!err) {
-        console.log('Books in inventory:', res.rows);
-      } else {
-        console.log('Error running query:', err.message);
-      }
-      client.end();
-    });
+    console.log('Connected to the database');
+    release();
   }
 });
+
+export default pool;
