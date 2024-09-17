@@ -6,6 +6,8 @@ export function MainContainer(){
     <div className={styles.mainContainer}>
       <div className={styles.cardContainer}>
         <Card />
+        <Card />
+        <Card />
       </div>
     </div>
   )

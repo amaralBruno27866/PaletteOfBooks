@@ -1,13 +1,24 @@
 .header{
   background: var(--gray-800);
+  height: 5rem;
   display: flex;
+  align-items: center;
   justify-content: center;
-  padding: 1rem 0;
+  gap: 1rem;
 }
 
 .header a{
-  font-weight: 700;
-  font-size: 2rem;
-  text-decoration: none;
   color: var(--gray-300);
+  font-size: 3rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all ease 0.3s;
+}
+
+.header a:hover{
+  color: var(--orange-500);
+}
+
+.logo{
+  color: var(--orange-500);
 }

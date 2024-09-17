@@ -10,7 +10,7 @@
 }
 
 .card:hover{
-  background: var(--gray-700);
+  border: solid 3px var(--orange-500);
 }
 
 .image img{
