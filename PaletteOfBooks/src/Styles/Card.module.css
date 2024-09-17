@@ -1,3 +1,61 @@
 .card{
-  background-color: cadetblue;
+  background: var(--gray-800);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border: solid 3px var(--gray-500);
+  border-radius: 8px;
+  transition: ease 0.3s;
+}
+
+.card:hover{
+  background: var(--gray-700);
+}
+
+.image img{
+  width: 300px;
+  border-radius: 8px;
+  margin: 5px 0;
+  padding: 3px;
+}
+
+.card section header{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gray-600);
+  padding: 5px;
+  border-radius: 8px;
+  margin: 3px;
+}
+
+.edit_bt{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 3px 0;
+}
+
+.edit_bt .editIcon{
+  color: var(--gray-500);
+  cursor: pointer;
+  transition: ease 0.3s;
+}
+
+.edit_bt .editIcon:hover{
+  color: var(--green-500);
+}
+.table table{
+  width: 100%;
+  margin: 0 3px;
+}
+
+.left{
+  text-align: left;
+}
+
+.right{
+  text-align: right;
+  padding-right: 3px;
 }
