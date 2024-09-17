@@ -1,13 +1,13 @@
 import styles from '../Styles/Navbar.module.css';
-import { FcList } from "react-icons/fc";
+import { FaList } from "react-icons/fa";
 
 export function Navbar(){
   return(
     <div className={styles.nav}>
       <nav>
-        <button>Add a new book</button>
-        <input type="text"/>
-        <FcList size={48}/>
+        <button>Add book</button>
+        <input type="text"placeholder='Search' className={styles.input} />
+        <FaList size={48} className={styles.filter} />
         <button>CSV</button>
         <button>JSON</button>
       </nav>
