@@ -5,6 +5,7 @@
   justify-content: center;
   width: 332px;
   height: 614px;
+  margin-left: 22px;
   border: solid 3px var(--gray-500);
   border-radius: 8px;
   transition: ease 0.3s;
