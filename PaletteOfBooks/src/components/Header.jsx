@@ -1,8 +1,8 @@
-import Styles from '../Styles/Header.module.css'
+import styles from '../Styles/Header.module.css'
 
 export function Header() {
   return (
-    <header className={Styles.header}>
+    <header className={styles.header}>
       <a href="#">
         Book Palette
       </a>

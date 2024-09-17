@@ -1,9 +1,11 @@
-import Styles from '../Styles/MainContainer.module.css';
+import styles from '../Styles/MainContainer.module.css';
 
 export function MainContainer(){
   return(
-    <div className={Styles.mainContainer}>
-      <h1>Content Main</h1>
+    <div className={styles.mainContainer}>
+      <div className={styles.cardContainer}>
+        <h1>main content</h1>
+      </div>
     </div>
   )
 }
