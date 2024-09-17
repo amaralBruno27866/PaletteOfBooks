@@ -23,10 +23,10 @@ client.connect((err) => {
   } else {
     console.log('Connected to database');
 
-    // Run a simple query to verify the connection
-    client.query('SELECT NOW()', (err, res) => {
+    // Query the inventory.book table to retrieve data
+    client.query('SELECT * FROM inventory.book', (err, res) => {
       if (!err) {
-        console.log('Current time:', res.rows[0]);
+        console.log('Books in inventory:', res.rows);
       } else {
         console.log('Error running query:', err.message);
       }
