@@ -4,10 +4,12 @@ import {FaFacebook, FaInstagram, FaLinkedin, FaGithub} from 'react-icons/fa'
 export function Footer(){
   return(
     <footer className={styles.footer}>
+
+      <div className={styles.container}>
+
       <span className={styles.blur}></span>
       <span className={styles.blur}></span>
 
-      <div className={styles.container}>
         <div className={styles.column}>
           <div className={styles.logo}>
             <img src="./beagle.png" alt="Beagle logo" />
@@ -46,6 +48,7 @@ export function Footer(){
           <a href="#">Terms & conditions</a>
         </div>
       </div>      
+      
     </footer>
   )
 }
