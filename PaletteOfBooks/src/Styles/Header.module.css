@@ -1,0 +1,13 @@
+.header{
+  background: var(--gray-800);
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.header a{
+  font-weight: 700;
+  font-size: 2rem;
+  text-decoration: none;
+  color: var(--gray-300);
+}
