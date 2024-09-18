@@ -18,29 +18,36 @@ export function BooksTable({ onSelectBook }) {
       });
   }, []);
 
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('en-US', options);
+  };
+
   return (
-    <table className={styles.table}>
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Genre</th>
-          <th>Published Date</th>
-          <th>ISBN</th>
-        </tr>
-      </thead>
-      <tbody>
-        {books.map(book => (
-          <tr key={book.id} onClick={() => onSelectBook(book)}>
-            <td>{book.title}</td>
-            <td>{book.author}</td>
-            <td>{book.genre}</td>
-            <td>{book.publication_date}</td>
-            <td>{book.isbn}</td>
+    <div className={styles['table-container']}>
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Published Date</th>
+            <th>ISBN</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {books.map(book => (
+            <tr key={book.id} onClick={() => onSelectBook(book)}>
+              <td>{book.title}</td>
+              <td>{book.author}</td>
+              <td>{book.genre}</td>
+              <td>{formatDate(book.publication_date)}</td>
+              <td>{book.isbn}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 

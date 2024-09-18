@@ -7,6 +7,11 @@ import { MdEditSquare } from "react-icons/md";
 import { FaTrashAlt } from "react-icons/fa";
 
 export function Card({ title, author, genre, publicationDate, isbn, imageUrl }) {
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('en-US', options);
+  };
+
   return (
     <div className={styles.card}>
       <section>
@@ -21,22 +26,24 @@ export function Card({ title, author, genre, publicationDate, isbn, imageUrl }) 
         
         <section className={styles.table}>
           <table>
-            <tr>
-              <td className={styles.left}>Author</td>
-              <td className={styles.right}>{author}</td>
-            </tr>
-            <tr>
-              <td className={styles.left}>Genre</td>
-              <td className={styles.right}>{genre}</td>
-            </tr>
-            <tr>
-              <td className={styles.left}>Published Date</td>
-              <td className={styles.right}>{publicationDate}</td>
-            </tr>
-            <tr>
-              <td className={styles.left}>ISBN</td>
-              <td className={styles.right}>{isbn}</td>
-            </tr>
+            <tbody>
+              <tr>
+                <td className={styles.left}>Author</td>
+                <td className={styles.right}>{author}</td>
+              </tr>
+              <tr>
+                <td className={styles.left}>Genre</td>
+                <td className={styles.right}>{genre}</td>
+              </tr>
+              <tr>
+                <td className={styles.left}>Published Date</td>
+                <td className={styles.right}>{formatDate(publicationDate)}</td>
+              </tr>
+              <tr>
+                <td className={styles.left}>ISBN</td>
+                <td className={styles.right}>{isbn}</td>
+              </tr>
+            </tbody>
           </table>
         </section>
 
