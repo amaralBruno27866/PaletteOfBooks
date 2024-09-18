@@ -15,6 +15,10 @@
 
 .nav button {
   width: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   border-radius: 8px;
   border: none;
   font-size: 1.25rem;

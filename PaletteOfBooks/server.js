@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import express from 'express';
-import pool from './db.js';
+import pool from './db.js'; // Add the .js extension
 const app = express();
 
 app.use(express.json());
@@ -33,11 +33,11 @@ app.get('/books/:id', async (req, res) => {
 
 // Create a new book ROUTE
 app.post('/books', async (req, res) => {
-  const { title, author, genre, publication_date, isbn } = req.body;
+  const { title, author, genre, publication_date, isbn, image_url } = req.body;
   try {
     const newBook = await pool.query(
-      'INSERT INTO inventory.book (title, author, genre, publication_date, isbn) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [title, author, genre, publication_date, isbn]
+      'INSERT INTO inventory.book (title, author, genre, publication_date, isbn, image_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+      [title, author, genre, publication_date, isbn, image_url]
     );
     res.json(newBook.rows[0]);
   } catch (err) {
@@ -49,11 +49,11 @@ app.post('/books', async (req, res) => {
 // Update a book by ID ROUTE
 app.put('/books/:id', async (req, res) => {
   const { id } = req.params;
-  const { title, author, genre, publication_date, isbn } = req.body;
+  const { title, author, genre, publication_date, isbn, image_url } = req.body;
   try {
     const updatedBook = await pool.query(
-      'UPDATE inventory.book SET title = $1, author = $2, genre = $3, publication_date = $4, isbn = $5 WHERE id = $6 RETURNING *',
-      [title, author, genre, publication_date, isbn, id]
+      'UPDATE inventory.book SET title = $1, author = $2, genre = $3, publication_date = $4, isbn = $5, image_url = $6 WHERE id = $7 RETURNING *',
+      [title, author, genre, publication_date, isbn, image_url, id]
     );
     if (updatedBook.rows.length === 0) {
       return res.status(404).send('Book not found');
@@ -68,8 +68,14 @@ app.put('/books/:id', async (req, res) => {
 // Delete a book by ID ROUTE
 app.delete('/books/:id', async (req, res) => {
   const { id } = req.params;
+
+  // Validate the id parameter
+  if (isNaN(id)) {
+    return res.status(400).send('Invalid book ID');
+  }
+
   try {
-    const deletedBook = await pool.query('DELETE FROM inventory.book WHERE id = $1 RETURNING *', [id]);
+    const deletedBook = await pool.query('DELETE FROM inventory.book WHERE id = $1 RETURNING *', [parseInt(id)]);
     if (deletedBook.rows.length === 0) {
       return res.status(404).send('Book not found');
     }
