@@ -8,6 +8,7 @@ import { Modal } from './Modal';
 export function BooksTable({ onSelectBook }) {
   const [books, setBooks] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     // Fetch books data from the backend
@@ -32,6 +33,23 @@ export function BooksTable({ onSelectBook }) {
 
   const handleCloseModal = () => {
     setSelectedBook(null);
+    setIsEditing(false);
+  };
+
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleSave = (updatedBook) => {
+    // Update the book in the state and close the modal
+    setBooks(books.map(book => (book.id === updatedBook.id ? updatedBook : book)));
+    handleCloseModal();
+  };
+
+  const handleDelete = () => {
+    // Delete the book from the state and close the modal
+    setBooks(books.filter(book => book.id !== selectedBook.id));
+    handleCloseModal();
   };
 
   return (
@@ -58,7 +76,16 @@ export function BooksTable({ onSelectBook }) {
           ))}
         </tbody>
       </table>
-      {selectedBook && <Modal book={selectedBook} onClose={handleCloseModal} />}
+      {selectedBook && (
+        <Modal
+          book={selectedBook}
+          onClose={handleCloseModal}
+          isEditing={isEditing}
+          onSave={handleSave}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
+      )}
     </div>
   );
 }

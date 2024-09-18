@@ -3,6 +3,7 @@
   height: 800px;
   overflow: auto; /* Add scrollbars if content overflows */
   margin: 0 auto; /* Center the table container */
+  border-radius: 8px;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

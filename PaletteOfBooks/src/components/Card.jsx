@@ -1,15 +1,31 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../Styles/Card.module.css';
 import { IoMdBookmarks } from "react-icons/io";
 import { MdEditSquare } from "react-icons/md";
 import { FaTrashAlt } from "react-icons/fa";
+import { ConfirmationDialog } from './ConfirmationDialog';
 
-export function Card({ title, author, genre, publicationDate, isbn, imageUrl }) {
+export function Card({ title, author, genre, publicationDate, isbn, imageUrl, onEdit, onDelete }) {
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options);
+  };
+
+  const handleDeleteClick = () => {
+    setShowDeleteConfirmation(true);
+  };
+
+  const handleConfirmDelete = () => {
+    setShowDeleteConfirmation(false);
+    onDelete();
+  };
+
+  const handleCancelDelete = () => {
+    setShowDeleteConfirmation(false);
   };
 
   return (
@@ -48,10 +64,17 @@ export function Card({ title, author, genre, publicationDate, isbn, imageUrl }) 
         </section>
 
         <div className={styles.edit_bt}>
-          <MdEditSquare size={32} className={styles.editIcon} />
-          <FaTrashAlt size={32} className={styles.trashIcon} />
+          <MdEditSquare size={32} className={styles.editIcon} onClick={onEdit} />
+          <FaTrashAlt size={32} className={styles.trashIcon} onClick={handleDeleteClick} />
         </div>
       </section>
+      {showDeleteConfirmation && (
+        <ConfirmationDialog
+          message="Are you sure you want to delete this book?"
+          onConfirm={handleConfirmDelete}
+          onCancel={handleCancelDelete}
+        />
+      )}
     </div>
   );
 }
@@ -63,4 +86,6 @@ Card.propTypes = {
   publicationDate: PropTypes.string.isRequired,
   isbn: PropTypes.string.isRequired,
   imageUrl: PropTypes.string.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
