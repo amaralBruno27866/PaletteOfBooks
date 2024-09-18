@@ -18,9 +18,26 @@ export function EditForm({ book, onSave, onCancel }) {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSave(formData);
+    try {
+      const response = await fetch(`http://localhost:5000/books/${book.id}`, { // Updated URL
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        const updatedBook = await response.json();
+        onSave(updatedBook); // Call onSave with updated data
+      } else {
+        console.error('Failed to update book');
+      }
+    } catch (error) {
+      console.error('Error updating book:', error);
+    }
   };
 
   return (
