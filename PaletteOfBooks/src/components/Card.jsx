@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../Styles/Card.module.css';
 import { IoMdBookmarks } from "react-icons/io";
@@ -5,12 +7,12 @@ import { MdEditSquare } from "react-icons/md";
 import { FaTrashAlt } from "react-icons/fa";
 
 export function Card({ title, author, genre, publicationDate, isbn, imageUrl }) {
-  return(
+  return (
     <div className={styles.card}>
       <section>
         <header>
           <IoMdBookmarks size={32} />
-          <h3>The Lord of the Ring</h3>
+          <h3>{title}</h3>
         </header>
 
         <div className={styles.image}>
@@ -39,12 +41,12 @@ export function Card({ title, author, genre, publicationDate, isbn, imageUrl }) 
         </section>
 
         <div className={styles.edit_bt}>
-          <MdEditSquare size={32} className={styles.editIcon}/>
-          <FaTrashAlt size={32} className={styles.trashIcon}/>
+          <MdEditSquare size={32} className={styles.editIcon} />
+          <FaTrashAlt size={32} className={styles.trashIcon} />
         </div>
       </section>
     </div>
-  )
+  );
 }
 
 Card.propTypes = {
@@ -53,5 +55,5 @@ Card.propTypes = {
   genre: PropTypes.string.isRequired,
   publicationDate: PropTypes.string.isRequired,
   isbn: PropTypes.string.isRequired,
-  imageUrl: PropTypes.string.isRequired
-}
+  imageUrl: PropTypes.string.isRequired,
+};

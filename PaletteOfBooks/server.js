@@ -1,8 +1,11 @@
 /* eslint-disable no-undef */
 import express from 'express';
+import cors from 'cors'; // Import the cors package
 import pool from './db.js'; // Add the .js extension
+
 const app = express();
 
+app.use(cors()); // Use the cors middleware
 app.use(express.json());
 
 // List all the books ROUTE

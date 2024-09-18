@@ -1,14 +1,10 @@
 import styles from '../Styles/MainContainer.module.css';
-import { Card } from './Card';
+import { BooksView } from './BookView';
 
-export function MainContainer(){
-  return(
+export function MainContainer() {
+  return (
     <div className={styles.mainContainer}>
-      <div className={styles.cardContainer}>
-        <Card />
-        <Card />
-        <Card />
-      </div>
+      <BooksView />
     </div>
-  )
+  );
 }
