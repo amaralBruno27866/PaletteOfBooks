@@ -1,10 +1,13 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import styles from '../Styles/BooksTable.module.css';
+import { Modal } from './Modal';
 
 export function BooksTable({ onSelectBook }) {
   const [books, setBooks] = useState([]);
+  const [selectedBook, setSelectedBook] = useState(null);
 
   useEffect(() => {
     // Fetch books data from the backend
@@ -23,6 +26,14 @@ export function BooksTable({ onSelectBook }) {
     return new Date(dateString).toLocaleDateString('en-US', options);
   };
 
+  const handleRowClick = (book) => {
+    setSelectedBook(book);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedBook(null);
+  };
+
   return (
     <div className={styles['table-container']}>
       <table className={styles.table}>
@@ -37,7 +48,7 @@ export function BooksTable({ onSelectBook }) {
         </thead>
         <tbody>
           {books.map(book => (
-            <tr key={book.id} onClick={() => onSelectBook(book)}>
+            <tr key={book.id} onClick={() => handleRowClick(book)}>
               <td>{book.title}</td>
               <td>{book.author}</td>
               <td>{book.genre}</td>
@@ -47,6 +58,7 @@ export function BooksTable({ onSelectBook }) {
           ))}
         </tbody>
       </table>
+      {selectedBook && <Modal book={selectedBook} onClose={handleCloseModal} />}
     </div>
   );
 }
