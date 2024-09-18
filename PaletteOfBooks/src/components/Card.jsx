@@ -37,7 +37,7 @@ export function Card({ title, author, genre, publicationDate, isbn, imageUrl, on
         </header>
 
         <div className={styles.image}>
-          <img src={imageUrl} alt={`${title} cover`} />
+          <img src={imageUrl || 'default-image-url.jpg'} alt={`${title} cover`} />
         </div>
         
         <section className={styles.table}>
@@ -85,7 +85,11 @@ Card.propTypes = {
   genre: PropTypes.string.isRequired,
   publicationDate: PropTypes.string.isRequired,
   isbn: PropTypes.string.isRequired,
-  imageUrl: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string,
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
+};
+
+Card.defaultProps = {
+  imageUrl: 'https://mymaterialforwebapps.blogspot.com/2024/09/blog-post_18.html',
 };

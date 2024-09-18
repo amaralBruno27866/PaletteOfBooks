@@ -8,9 +8,9 @@ export function EditForm({ book, onSave, onCancel }) {
     title: book.title,
     author: book.author,
     genre: book.genre,
-    publicationDate: book.publication_date,
+    publicationDate: book.publication_date || '',
     isbn: book.isbn,
-    imageUrl: book.image_url,
+    imageUrl: book.image_url || 'https://mymaterialforwebapps.blogspot.com/2024/09/blog-post_18.html',
   });
 
   const handleChange = (e) => {
@@ -97,4 +97,8 @@ EditForm.propTypes = {
   book: PropTypes.object.isRequired,
   onSave: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+};
+
+EditForm.defaultProps = {
+  imageUrl: 'https://mymaterialforwebapps.blogspot.com/2024/09/blog-post_18.html',
 };
