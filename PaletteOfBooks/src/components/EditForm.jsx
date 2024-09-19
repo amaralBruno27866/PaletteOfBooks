@@ -1,16 +1,15 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../Styles/EditForm.module.css';
 
 export function EditForm({ book, onSave, onCancel }) {
   const [formData, setFormData] = useState({
-    title: book.title,
-    author: book.author,
-    genre: book.genre,
-    publicationDate: book.publication_date || '',
-    isbn: book.isbn,
-    imageUrl: book.image_url || '',
+    title: book?.title || '',
+    author: book?.author || '',
+    genre: book?.genre || '',
+    publicationDate: book?.publication_date || '',
+    isbn: book?.isbn || '',
+    imageUrl: book?.image_url || '',
   });
 
   const handleChange = (e) => {
@@ -30,8 +29,8 @@ export function EditForm({ book, onSave, onCancel }) {
     };
 
     try {
-      const response = await fetch(`http://localhost:5000/books/${book.id}`, {
-        method: 'PUT',
+      const response = await fetch(`http://localhost:5000/books/${book ? book.id : ''}`, {
+        method: book ? 'PUT' : 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -42,10 +41,10 @@ export function EditForm({ book, onSave, onCancel }) {
         const updatedBook = await response.json();
         onSave(updatedBook);
       } else {
-        console.error('Failed to update book');
+        console.error('Failed to save book');
       }
     } catch (error) {
-      console.error('Error updating book:', error);
+      console.error('Error saving book:', error);
     }
   };
 
@@ -120,11 +119,12 @@ export function EditForm({ book, onSave, onCancel }) {
 }
 
 EditForm.propTypes = {
-  book: PropTypes.object.isRequired,
+  book: PropTypes.object,
   onSave: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
 };
 
 EditForm.defaultProps = {
+  book: null,
   imageUrl: 'https://mymaterialforwebapps.blogspot.com/2024/09/blog-post_18.html',
 };

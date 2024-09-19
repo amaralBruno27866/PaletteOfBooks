@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../Styles/Modal.module.css';
@@ -8,8 +7,6 @@ import { ConfirmationDialog } from './ConfirmationDialog';
 
 export function Modal({ book, onClose, isEditing, onSave, onEdit, onDelete }) {
   const [showLeaveConfirmation, setShowLeaveConfirmation] = useState(false);
-
-  if (!book) return null;
 
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -33,7 +30,7 @@ export function Modal({ book, onClose, isEditing, onSave, onEdit, onDelete }) {
   return (
     <div className={styles.overlay} onClick={handleOverlayClick}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        {isEditing ? (
+        {isEditing || !book ? (
           <EditForm book={book} onSave={onSave} onCancel={onClose} />
         ) : (
           <Card {...book} onEdit={onEdit} onDelete={onDelete} />
