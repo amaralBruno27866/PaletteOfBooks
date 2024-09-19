@@ -7,7 +7,7 @@ import { MdEditSquare } from "react-icons/md";
 import { FaTrashAlt } from "react-icons/fa";
 import { ConfirmationDialog } from './ConfirmationDialog';
 
-export function Card({ title, author, genre, publicationDate, isbn, imageUrl, onEdit, onDelete }) {
+export function Card({ id, title, author, genre, publicationDate, isbn, imageUrl, onEdit, onDelete }) {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
   const formatDate = (dateString) => {
@@ -19,13 +19,29 @@ export function Card({ title, author, genre, publicationDate, isbn, imageUrl, on
     setShowDeleteConfirmation(true);
   };
 
-  const handleConfirmDelete = () => {
+  const handleConfirmDelete = async () => {
     setShowDeleteConfirmation(false);
-    onDelete();
+    await handleDelete();
   };
 
   const handleCancelDelete = () => {
     setShowDeleteConfirmation(false);
+  };
+
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/books/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        onDelete();
+      } else {
+        console.error('Failed to delete book');
+      }
+    } catch (error) {
+      console.error('Error deleting book:', error);
+    }
   };
 
   return (
@@ -80,6 +96,7 @@ export function Card({ title, author, genre, publicationDate, isbn, imageUrl, on
 }
 
 Card.propTypes = {
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
   genre: PropTypes.string.isRequired,

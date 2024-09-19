@@ -10,7 +10,7 @@ export function EditForm({ book, onSave, onCancel }) {
     genre: book.genre,
     publicationDate: book.publication_date || '',
     isbn: book.isbn,
-    imageUrl: book.image_url || 'https://mymaterialforwebapps.blogspot.com/2024/09/blog-post_18.html',
+    imageUrl: book.image_url || '',
   });
 
   const handleChange = (e) => {
@@ -20,18 +20,27 @@ export function EditForm({ book, onSave, onCancel }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Convert date format to YYYY-MM-DD
+    const formattedDate = new Date(formData.publicationDate).toISOString().split('T')[0];
+
+    const updatedFormData = {
+      ...formData,
+      publicationDate: formattedDate,
+    };
+
     try {
-      const response = await fetch(`http://localhost:5000/books/${book.id}`, { // Updated URL
+      const response = await fetch(`http://localhost:5000/books/${book.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(updatedFormData),
       });
-  
+
       if (response.ok) {
         const updatedBook = await response.json();
-        onSave(updatedBook); // Call onSave with updated data
+        onSave(updatedBook);
       } else {
         console.error('Failed to update book');
       }
