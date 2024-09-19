@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
 import pkg from 'pg'
 import dotenv from 'dotenv'
 
@@ -8,20 +7,20 @@ dotenv.config();
 const { Pool } = pkg;
 
 // Validate required environment variables
-const requiredEnvVariables = ['DB_USER', 'DB_PASSWORD', 'DB_HOST', 'DB_PORT', 'DB_DATABASE'];
+const requiredEnvVariables = ['DB_USER', 'DB_HOST', 'DB_NAME', 'DB_PASSWORD', 'DB_PORT'];
 requiredEnvVariables.forEach((varName) =>{
   if(!process.env[varName]){
-    throw new Error(`Missing required enviroment variable: ${varName}`);
+    throw new Error(`Environment variable ${varName} is required but not set.`);
   }
 });
 
 const pool = new Pool({
-  hots: process.env.DB_HOST,
-  port: process.env.DB_PORT,
+  host: process.env.DB_HOST,
   user: process.env.DB_USER,
+  port: process.env.DB_PORT,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-  ssl:{
+  database: process.env.DB_NAME,
+  ssl: {
     rejectUnauthorized: false
   }
 });
