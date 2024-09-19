@@ -4,7 +4,7 @@ import { FaList, FaFileDownload } from "react-icons/fa";
 import { IoMdAddCircle } from "react-icons/io";
 import { Modal } from './Modal';
 
-export function Navbar() {
+export function Navbar({ onAddBook }) {
   const [isAdding, setIsAdding] = useState(false);
 
   const handleAddBook = () => {
@@ -13,7 +13,7 @@ export function Navbar() {
 
   const handleSave = (newBook) => {
     // Handle saving the new book
-    console.log('New book saved:', newBook);
+    onAddBook(newBook);
     setIsAdding(false);
   };
 
