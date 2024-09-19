@@ -12,12 +12,15 @@ export function BooksView() {
       <BooksTable onSelectBook={setSelectedBook} />
       {selectedBook && (
         <Card
+          id={selectedBook.id}
           title={selectedBook.title}
           author={selectedBook.author}
           genre={selectedBook.genre}
           publicationDate={selectedBook.publication_date}
           isbn={selectedBook.isbn}
-          imageUrl={selectedBook.image_url}
+          imageUrl={selectedBook.url}
+          onEdit={() => {}}
+          onDelete={() => {}}
         />
       )}
     </div>

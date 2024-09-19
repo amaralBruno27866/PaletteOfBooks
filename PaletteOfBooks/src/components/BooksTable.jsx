@@ -18,7 +18,7 @@ export function BooksTable({ onSelectBook }) {
         setBooks(response.data);
       })
       .catch(error => {
-        console.error('Error fetching books:', error); // ERROR ON THIS LINE
+        console.error('Error fetching books:', error);
       });
   }, []);
 

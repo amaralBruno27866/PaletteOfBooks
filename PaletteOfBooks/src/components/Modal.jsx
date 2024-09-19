@@ -5,7 +5,7 @@ import { Card } from './Card';
 import { EditForm } from './EditForm';
 import { ConfirmationDialog } from './ConfirmationDialog';
 
-export function Modal({ book, onClose, isEditing, onSave, onEdit, onDelete }) {
+export function Modal({ book = null, onClose, isEditing = false, onSave, onEdit, onDelete }) {
   const [showLeaveConfirmation, setShowLeaveConfirmation] = useState(false);
 
   const handleOverlayClick = (e) => {

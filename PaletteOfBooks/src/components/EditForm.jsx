@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../Styles/EditForm.module.css';
 
-export function EditForm({ book, onSave, onCancel }) {
+export function EditForm({ book = null, onSave, onCancel }) {
   const [formData, setFormData] = useState({
     title: book?.title || '',
     author: book?.author || '',
     genre: book?.genre || '',
     publicationDate: book?.publication_date || '',
     isbn: book?.isbn || '',
-    imageUrl: book?.image_url || '',
+    url: book?.url || '',
   });
 
   const handleChange = (e) => {
@@ -101,12 +101,12 @@ export function EditForm({ book, onSave, onCancel }) {
         />
       </div>
       <div className={styles.formGroup}>
-        <label htmlFor="imageUrl">Image URL</label>
+        <label htmlFor="url">Image URL</label>
         <input
           type="text"
-          id="imageUrl"
-          name="imageUrl"
-          value={formData.imageUrl}
+          id="url"
+          name="url"
+          value={formData.url}
           onChange={handleChange}
         />
       </div>
@@ -119,12 +119,15 @@ export function EditForm({ book, onSave, onCancel }) {
 }
 
 EditForm.propTypes = {
-  book: PropTypes.object,
+  book: PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    author: PropTypes.string,
+    genre: PropTypes.string,
+    publication_date: PropTypes.string,
+    isbn: PropTypes.string,
+    url: PropTypes.string,
+  }),
   onSave: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
-};
-
-EditForm.defaultProps = {
-  book: null,
-  imageUrl: 'https://mymaterialforwebapps.blogspot.com/2024/09/blog-post_18.html',
 };

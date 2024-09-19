@@ -7,7 +7,7 @@ import { MdEditSquare } from "react-icons/md";
 import { FaTrashAlt } from "react-icons/fa";
 import { ConfirmationDialog } from './ConfirmationDialog';
 
-export function Card({ id, title, author, genre, publicationDate, isbn, imageUrl, onEdit, onDelete }) {
+export function Card({ id, title, author, genre, publicationDate, isbn, url, onEdit, onDelete }) {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
   const formatDate = (dateString) => {
@@ -53,7 +53,7 @@ export function Card({ id, title, author, genre, publicationDate, isbn, imageUrl
         </header>
 
         <div className={styles.image}>
-          <img src={imageUrl || 'default-image-url.jpg'} alt={`${title} cover`} />
+          <img src={url || 'https://via.placeholder.com/150'} alt={`${title} cover`} />
         </div>
         
         <section className={styles.table}>
@@ -102,11 +102,11 @@ Card.propTypes = {
   genre: PropTypes.string.isRequired,
   publicationDate: PropTypes.string.isRequired,
   isbn: PropTypes.string.isRequired,
-  imageUrl: PropTypes.string,
+  url: PropTypes.string,
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
 
 Card.defaultProps = {
-  imageUrl: 'https://mymaterialforwebapps.blogspot.com/2024/09/blog-post_18.html',
+  url: 'https://via.placeholder.com/150',
 };

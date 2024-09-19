@@ -1,4 +1,4 @@
-.card{
+.card {
   background: var(--gray-900);
   display: flex;
   align-items: center;
@@ -11,19 +11,28 @@
   transition: ease 0.3s;
 }
 
-.card:hover{
+.card:hover {
   border: solid 3px var(--orange-500);
   color: var(--orange-500);
   transform: scale(1.05);
 }
 
-.image img{
+.image {
   width: 300px;
+  height: 385px; /* Set the height to crop the image */
+  overflow: hidden; /* Hide the overflow to crop the image */
   border-radius: 8px;
   margin-bottom: 1rem;
 }
 
-.card section header{
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cover the area while maintaining aspect ratio */
+  border-radius: 8px;
+}
+
+.card section header {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -32,42 +41,42 @@
   margin-bottom: 1rem;
 }
 
-.edit_bt{
+.edit_bt {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8rem;
 }
 
-.edit_bt .editIcon{
+.edit_bt .editIcon {
   color: var(--gray-500);
   cursor: pointer;
   transition: ease 0.3s;
 }
 
-.edit_bt .trashIcon{
+.edit_bt .trashIcon {
   color: var(--gray-500);
   cursor: pointer;
   transition: ease 0.3s;
 }
 
-.edit_bt .editIcon:hover{
+.edit_bt .editIcon:hover {
   color: var(--green-500);
 }
 
-.edit_bt .trashIcon:hover{
+.edit_bt .trashIcon:hover {
   color: var(--red-500);
 }
 
-.table table{
+.table table {
   width: 100%;
   margin-bottom: 1rem;
 }
 
-.left{
+.left {
   text-align: left;
 }
 
-.right{
+.right {
   text-align: right;
 }

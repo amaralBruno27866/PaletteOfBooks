@@ -1,11 +1,11 @@
 /* eslint-disable no-undef */
 import express from 'express';
-import cors from 'cors'; // Import the cors package
-import pool from './db.js'; // Add the .js extension
+import cors from 'cors';
+import pool from './db.js';
 
 const app = express();
 
-app.use(cors()); // Use the cors middleware
+app.use(cors());
 app.use(express.json());
 
 // List all the books ROUTE
@@ -22,8 +22,14 @@ app.get('/books', async (req, res) => {
 // Get a single book by ID ROUTE
 app.get('/books/:id', async (req, res) => {
   const { id } = req.params;
+
+  // Validate the id parameter
+  if (isNaN(id)) {
+    return res.status(400).send('Invalid book ID');
+  }
+
   try {
-    const book = await pool.query('SELECT * FROM inventory.book WHERE id = $1', [id]);
+    const book = await pool.query('SELECT * FROM inventory.book WHERE id = $1', [parseInt(id)]);
     if (book.rows.length === 0) {
       return res.status(404).send('Book not found');
     }
@@ -36,11 +42,11 @@ app.get('/books/:id', async (req, res) => {
 
 // Create a new book ROUTE
 app.post('/books', async (req, res) => {
-  const { title, author, genre, publication_date, isbn, image_url } = req.body;
+  const { title, author, genre, publication_date, isbn, url } = req.body;
   try {
     const newBook = await pool.query(
-      'INSERT INTO inventory.book (title, author, genre, publication_date, isbn, image_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-      [title, author, genre, publication_date, isbn, image_url]
+      'INSERT INTO inventory.book (title, author, genre, publication_date, isbn, url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+      [title, author, genre, publication_date, isbn, url]
     );
     res.json(newBook.rows[0]);
   } catch (err) {
@@ -52,11 +58,17 @@ app.post('/books', async (req, res) => {
 // Update a book by ID ROUTE
 app.put('/books/:id', async (req, res) => {
   const { id } = req.params;
-  const { title, author, genre, publication_date, isbn, image_url } = req.body;
+  const { title, author, genre, publication_date, isbn, url } = req.body;
+
+  // Validate the id parameter
+  if (isNaN(id)) {
+    return res.status(400).send('Invalid book ID');
+  }
+
   try {
     const updatedBook = await pool.query(
-      'UPDATE inventory.book SET title = $1, author = $2, genre = $3, publication_date = $4, isbn = $5, image_url = $6 WHERE id = $7 RETURNING *',
-      [title, author, genre, publication_date, isbn, image_url, id]
+      'UPDATE inventory.book SET title = $1, author = $2, genre = $3, publication_date = $4, isbn = $5, url = $6 WHERE id = $7 RETURNING *',
+      [title, author, genre, publication_date, isbn, url, parseInt(id)]
     );
     if (updatedBook.rows.length === 0) {
       return res.status(404).send('Book not found');
@@ -100,3 +112,16 @@ app.listen(PORT, async () => {
     console.error('Error fetching books:', err.message);
   }
 });
+
+// Test database connection
+async function testConnection() {
+  try {
+    const client = await pool.connect();
+    console.log('Connected to the database');
+    client.release();
+  } catch (err) {
+    console.error('Error connecting to the database:', err.stack);
+  }
+}
+
+testConnection();
