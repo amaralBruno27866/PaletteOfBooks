@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import styles from '../Styles/Navbar.module.css';
 import { FaList, FaFileDownload } from "react-icons/fa";
