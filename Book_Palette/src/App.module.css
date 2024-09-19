@@ -1,6 +1,24 @@
-.copyright{
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  /* Estilos do Header (se houver algum) */
+}
+
+footer {
+  /* Estilos do Footer */
+  margin-top: auto; /* Isso garante que o footer fique no final do conteúdo */
+  padding: 1rem;
+  background: var(--gray-700);
+  color: white;
+  text-align: center;
+}
+
+.copyright {
   max-width: 100%;
-  margin: auto;
   padding: 1rem;
   color: var(--gray-300);
   font-size: 0.8rem;
