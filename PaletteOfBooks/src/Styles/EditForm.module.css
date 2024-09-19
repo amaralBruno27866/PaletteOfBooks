@@ -39,15 +39,25 @@
 }
 
 .formActions button[type="submit"] {
-  background-color: var(--green-500);
+  background-color: var(--gray-500);
   color: white;
+  transition: all 0.3s ease;
+}
+
+.formActions button[type="submit"]:hover{
+  background: var(--green-500);
 }
 
 .formActions button[type="button"] {
-  background-color: var(--red-500);
+  background-color: var(--gray-500);
   color: white;
+  transition: all 0.3s ease;
 }
 
-.formActions button:hover {
-  opacity: 0.8;
+.formActions button[type="button"]:hover{
+  background: var(--red-500);
 }
+
+/* .formActions button:hover {
+  opacity: 0.8;
+} */
