@@ -120,7 +120,7 @@ export function EditForm({ book = null, onSave, onCancel }) {
 
 EditForm.propTypes = {
   book: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     title: PropTypes.string,
     author: PropTypes.string,
     genre: PropTypes.string,

@@ -1,20 +1,29 @@
 /* eslint-disable no-undef */
 import express from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
 import pool from './db.js';
 
 const app = express();
 
 app.use(cors());
+app.use(helmet());
 app.use(express.json());
+
+// Middleware to log requests
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
 
 // List all the books ROUTE
 app.get('/books', async (req, res) => {
   try {
     const allBooks = await pool.query('SELECT * FROM inventory.book');
+    console.log('Fetched all books');
     res.json(allBooks.rows);
   } catch (err) {
-    console.error(err.message);
+    console.error('Error fetching books:', err.message);
     res.status(500).send('Server Error');
   }
 });
@@ -25,17 +34,20 @@ app.get('/books/:id', async (req, res) => {
 
   // Validate the id parameter
   if (isNaN(id)) {
+    console.log('Invalid book ID:', id);
     return res.status(400).send('Invalid book ID');
   }
 
   try {
     const book = await pool.query('SELECT * FROM inventory.book WHERE id = $1', [parseInt(id)]);
     if (book.rows.length === 0) {
+      console.log('Book not found:', id);
       return res.status(404).send('Book not found');
     }
+    console.log('Fetched book:', id);
     res.json(book.rows[0]);
   } catch (err) {
-    console.error(err.message);
+    console.error('Error fetching book:', err.message);
     res.status(500).send('Server Error');
   }
 });
@@ -43,14 +55,22 @@ app.get('/books/:id', async (req, res) => {
 // Create a new book ROUTE
 app.post('/books', async (req, res) => {
   const { title, author, genre, publication_date, isbn, url } = req.body;
+
+  // Validate request body
+  if (!title || !author || !genre || !publication_date || !isbn || !url) {
+    console.log('Missing fields in request body');
+    return res.status(400).send('All fields are required');
+  }
+
   try {
     const newBook = await pool.query(
       'INSERT INTO inventory.book (title, author, genre, publication_date, isbn, url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
       [title, author, genre, publication_date, isbn, url]
     );
+    console.log('Created new book:', newBook.rows[0].id);
     res.json(newBook.rows[0]);
   } catch (err) {
-    console.error(err.message);
+    console.error('Error creating book:', err.message);
     res.status(500).send('Server Error');
   }
 });
@@ -62,7 +82,14 @@ app.put('/books/:id', async (req, res) => {
 
   // Validate the id parameter
   if (isNaN(id)) {
+    console.log('Invalid book ID:', id);
     return res.status(400).send('Invalid book ID');
+  }
+
+  // Validate request body
+  if (!title || !author || !genre || !publication_date || !isbn || !url) {
+    console.log('Missing fields in request body');
+    return res.status(400).send('All fields are required');
   }
 
   try {
@@ -71,11 +98,13 @@ app.put('/books/:id', async (req, res) => {
       [title, author, genre, publication_date, isbn, url, parseInt(id)]
     );
     if (updatedBook.rows.length === 0) {
+      console.log('Book not found:', id);
       return res.status(404).send('Book not found');
     }
+    console.log('Updated book:', id);
     res.json(updatedBook.rows[0]);
   } catch (err) {
-    console.error(err.message);
+    console.error('Error updating book:', err.message);
     res.status(500).send('Server Error');
   }
 });
@@ -86,17 +115,20 @@ app.delete('/books/:id', async (req, res) => {
 
   // Validate the id parameter
   if (isNaN(id)) {
+    console.log('Invalid book ID:', id);
     return res.status(400).send('Invalid book ID');
   }
 
   try {
     const deletedBook = await pool.query('DELETE FROM inventory.book WHERE id = $1 RETURNING *', [parseInt(id)]);
     if (deletedBook.rows.length === 0) {
+      console.log('Book not found:', id);
       return res.status(404).send('Book not found');
     }
+    console.log('Deleted book:', id);
     res.json(deletedBook.rows[0]);
   } catch (err) {
-    console.error(err.message);
+    console.error('Error deleting book:', err.message);
     res.status(500).send('Server Error');
   }
 });

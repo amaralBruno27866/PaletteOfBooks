@@ -9,7 +9,7 @@ import './global.css';
 
 export function App() {
   const [books, setBooks] = useState([]);
-  const [selectedBook, setSelectedBook] = useState(null);
+  const [setSelectedBook] = useState(null);
 
   useEffect(() => {
     // Fetch books data from the backend
