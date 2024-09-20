@@ -57,7 +57,7 @@ http://localhost:3000/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/PaletteOfBooks.git
+   git clone https://github.com/amaralBruno27866/PaletteOfBooks.git
    ```
 
 2. Install project dependencies:
