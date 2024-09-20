@@ -14,14 +14,13 @@
 ## Technologies Used
 
 ### Backend:
-- **Node.js** with **Express** (or Java with **Spring Boot**, depending on the final choice)
+- **Node.js** with **Express**
 - **PostgreSQL** for relational data storage
 - **Sequelize** (or JPA) as the ORM to simplify database interaction
 
 ### Frontend:
 - **HTML5**, **CSS3**, and **JavaScript**
 - **React.js** for a dynamic and modern interface
-- **Bootstrap** (or another CSS framework) for responsiveness
 
 ### Others:
 - **PostgreSQL** as the relational database
@@ -39,6 +38,16 @@ The system uses a main table called `Inventory` to store book information, with 
 - `ISBN`
 
 ## How to Run the Project
+Start by running the command:
+npm install
+This command will install all the dependencies and libraries that were used in the project.
+Then run the command:
+npm run dev
+node server.js
+These two commands will run both the system and connect to the database.
+
+From there, simply access the address below in your browser
+http://localhost:3000/
 
 ### Prerequisites:
 - Node.js or Java (depending on the backend choice)
