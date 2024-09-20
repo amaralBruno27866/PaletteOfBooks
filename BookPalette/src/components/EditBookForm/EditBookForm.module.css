@@ -1,0 +1,111 @@
+.container{
+  width: 1200px;
+  height: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form{
+  background: var(--gray-800);
+  width: 416px;
+  height: 600px;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.title{
+  background: var(--gray-700);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.title h3{
+  margin-left: 8px;
+  color: var(--orange-500);
+}
+
+.close_bt{
+  background: none;
+  color: var(--gray-500);
+  transition: all ease 0.3s;
+  border: none;
+  display: flex;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.close_bt:hover{
+  color: var(--red-500);
+}
+
+.content{
+  display: flex;
+  width: 384px;
+  flex-direction: column;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.content label{
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.content input{
+  margin-left: 1rem;
+  padding: 0.5rem;
+  border: 1px solid var(--gray-300);
+  border-radius: 4px;
+  width: 368px;
+  transform: all ease 0.3s;
+}
+
+.content input:hover{
+  background: var(--gray-300);
+}
+
+.content select{
+  font-size: 1.5rem;
+  width: 368px;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.buttons_save_cancel{
+  width: 384px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8rem;
+}
+
+.save_bt{
+  background: none;
+  border: none;
+  color: var(--gray-300);
+  transition: all ease 0.3s;
+  cursor: pointer;
+}
+
+.save_bt:hover{
+  color: var(--green-500);
+}
+
+.cancel_bt{
+  background: none;
+  border: none;
+  color: var(--gray-300);
+  transition: all ease 0.3s;
+  cursor: pointer;
+}
+
+.cancel_bt:hover{
+  color: var(--red-500);
+}
