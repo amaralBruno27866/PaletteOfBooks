@@ -1,0 +1,41 @@
+-- Schema creation
+CREATE SCHEMA inventory;
+
+-- Creation the table inventory inside schema
+CREATE TABLE inventory.book (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    genre VARCHAR(100),
+    publication_date DATE,
+    isbn VARCHAR(20) UNIQUE,
+    url VARCHAR(255)
+);
+
+-- Insert the basic data for inventory.book
+insert into inventory.book (title, author, genre, publication_date, isbn)
+values
+  ('the name of the wind', 'patrick rothfuss', 'fantasy', '2007-03-06', '9780756404776'),
+  ('the wise man s fear', 'patrick rothfuss', 'fantasy', '2011-03-01', '9780756406220'),
+  ('a game of thrones', 'george r. r. martin', 'fantasy', '1996-08-01', '0553103540'),
+  ('the midnight library', 'matt haig', 'fantasy', '2012-08-01', '9780007466127'),
+  ('the alchemist', 'paulo coelho', 'fiction', '1988-03-01', '9788501058400'),
+  ('a tale of two cities', 'charles dickens', 'classic', '1859-04-30', '142310620'),
+  ('the little prince', 'antoine de saint-exupéry', 'children s', '1943-04-06', '9782253040000'),
+  ('pride and prejudice', 'jane austen', 'romance', '1813-01-28', '184171356'),
+  ('the hobbit', 'j. r. r. tolkien', 'fantasy', '1937-09-21', '0618260307'),
+  ('1984', 'george orwell', 'dystopian', '1949-06-08', '0451524934'),
+  ('the lord of the rings: the fellowship of the ring', 'j. r. r. tolkien', 'fantasy', '1954-07-29', '0618346007'),
+  ('the name of the rose', 'umberto eco', 'mystery', '1980-01-01', '8501007462'),
+  ('the count of monte cristo', 'alexandre dumas', 'adventure', '1844-01-01', '9788535914010'),
+  ('the wizard of oz', 'l. frank baum', 'children s', '1900-05-17', '0679400323'),
+  ('frankenstein', 'mary shelley', 'horror', '1818-01-01', '142310243'),
+  ('strange case of dr jekyll and mr hyde', 'robert louis stevenson', 'horror', '1886-01-01', '9788501057952'),
+  ('don quixote', 'miguel de cervantes', 'classic', '1605-01-01', '9788501077796'),
+  ('the shining', 'stephen king', 'horror', '1977-01-01', '0345345573'),
+  ('the kite runner', 'khaled hosseini', 'contemporary', '2003-03-03', '0385503753'),
+  ('one hundred years of solitude', 'gabriel garcía márquez', 'magical realism', '1967-01-01', '0060806672');
+
+-- Select all data for verify
+SELECT * FROM inventory.book;
+
